@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tip Calculator</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script src="js/script.js" defer></script>
+</head>
+<body onload="calcFunction();">
+    <div class="calculator">
+        <form class="calculator--input" name="tipcalc">
+            <div class="bill">
+                <span class="label--row"><h2 class="label label--input">Bill</h2><h2 class="label label--error bill--error"></h2></span>
+                <input class="tip--input bill--amount" type="number" placeholder="0.00">
+            </div> 
+            <div class="tip--percentage">
+                <h2 class="label label--input">Select Tip %</h2>
+                <div class="tip--percentage--grid">
+                    <button class="tip--percentage--button" type="button" onclick="activeBttn()">5%</button>
+                    <button class="tip--percentage--button" type="button">10%</button>
+                    <button class="tip--percentage--button" type="button">15%</button>
+                    <button class="tip--percentage--button" type="button">25%</button>
+                    <button class="tip--percentage--button" type="button">50%</button>
+                    <input class="tip--percentage--button custom" type="number" placeholder="Custom">
+                </div>
+            </div>
+            <div class="people">
+                <span class="label--row"><h2 class="label label--input">Number of People</h2><h2 class="label label--error people--error"></h2></span>
+                <input class="tip--input people--number" type="number" placeholder="1">
+            </div>
+        </form>
+        <div class="calculator--output">
+            <div class="tip--output">
+                <div class="tip--info">
+                    <div class="tip--info--desc">
+                        <h2 class="label label--output">Tip Amount</h2>
+                        <h3 class="sublabel">/ person</h3>
+                    </div>
+                    <h1 class="tip--output--amount">0.00</h1>
+                </div>
+                <div class="tip--info">
+                    <div class="tip--info--desc">
+                        <h2 class="label label--output">Total</h2>
+                        <h3 class="sublabel">/ person</h3>
+                    </div>
+                    <h1 class="tip--output--total">0.00</h1>
+                </div>
+            </div>
+            <button class="reset--bttn" onclick="tipAmount()">RESET</button>
+        </div>
+    </div>
+</body>
+</html>
