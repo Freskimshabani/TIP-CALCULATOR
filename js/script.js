@@ -3,12 +3,6 @@ var PeopleNr = document.querySelector('.people--number');
 var Bill = document.querySelector('.bill--amount');
 
 var Five = document.querySelector('.tip--percentage--button').value = 0.05;
-var Ten = document.querySelector('tip--percentage--button').value = 0.1;
-var Fifteen = document.querySelector('tip--percentage--button').value = 0.15;
-var TwentyFive = document.querySelector('tip--percentage--button').value = 0.25;
-var Fifty = document.querySelector('tip--percentage--button').value = 0.5;
-var Custom = document.querySelector('tip--percentage--button').value;
-
 
 function validInput(){
     if(Bill.value == null ,Bill.value == 0){
@@ -27,24 +21,30 @@ function validInput(){
     } else if(PeopleNr.value <= 0){
         document.querySelector('.people--error').innerHTML = "Cannot be negative!"
         PeopleNr.classList.add('error');
-
+        
     } else{
         document.querySelector('.people--error').innerHTML = null;
         PeopleNr.classList.remove('error');
-
+        
     };
 }
 
 function tipAmount(){
+    validInput();
     let tipPerc = Bill.value * Five;
     let result = tipPerc / PeopleNr.value;
-    document.querySelector('.tip--output--amount').innerHTML = result;
-    document.querySelector('.tip--output--total').innerHTML = tipPerc;
-    console.log(result);
+    var rounded = Math.round((result + Number.EPSILON) * 100) / 100;
+    document.querySelector('.tip--output--amount').innerHTML = "$" + rounded;
+    document.querySelector('.tip--output--total').innerHTML = "$" + tipPerc;
+    console.log(result);  
+}
+function resetBttn(){
+    Bill.value= null;
+    PeopleNr.value = null;
+    document.querySelector('.tip--output--amount').innerHTML = "$0.00";
+    document.querySelector('.tip--output--total').innerHTML = "$0.00";
 }
 
-function calcFunction(){
-    if(validInput == false){
-        return tipAmount()
-    } else{}
+if (Bill.after.value == ""||PeopleNr.after.value == ""){
+    validInput();
 }
