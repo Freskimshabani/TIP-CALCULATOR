@@ -1,50 +1,84 @@
-var PeopleNr = document.querySelector('.people--number');
+const billInputField = document.getElementById('bill__input');
+const peopleInputField = document.getElementById('people__input');
 
-var Bill = document.querySelector('.bill--amount');
+const tipPercentButtons = document.querySelectorAll('.percent__button');
+const customTipPercentButton = document.querySelector('.custom__button');
 
-var Five = document.querySelector('.tip--percentage--button').value = 0.05;
+let peopleError = document.getElementById('people__error');
+let billError = document.getElementById('bill__error');
 
-function validInput(){
-    if(Bill.value == null ,Bill.value == 0){
-        document.querySelector('.bill--error').innerHTML = "Cannot be 0!"
-        Bill.classList.add('error');
-    } else if(Bill.value <= 0){
-        document.querySelector('.bill--error').innerHTML = "Cannot be negative!"
-        Bill.classList.add('error');
-    } else{
-        document.querySelector('.bill--error').innerHTML = null;
-        Bill.classList.remove('error');
-    };
-    if(PeopleNr.value == null, PeopleNr.value == 0){
-        document.querySelector('.people--error').innerHTML = "Cannot be 0!"
-        PeopleNr.classList.add('error');
-    } else if(PeopleNr.value <= 0){
-        document.querySelector('.people--error').innerHTML = "Cannot be negative!"
-        PeopleNr.classList.add('error');
-        
-    } else{
-        document.querySelector('.people--error').innerHTML = null;
-        PeopleNr.classList.remove('error');
-        
-    };
+const tipAmountDisplay = document.getElementById('tip__amount');
+const tipTotalDisplay = document.getElementById('tip__total');
+
+function isInputEmpty() {
+    let billValue = document.getElementById('bill__input').value;
+    let peopleValue = document.getElementById('people__input').value;
+
+    if (billValue == '') {
+        billInputField.classList.add('input__style--error');
+        billError.textContent = 'Cannot be 0!';
+    } else if (billValue < 1.00) {
+        billInputField.classList.add('input__style--error');
+        billError.textContent = 'Must be at least $1.00!';
+    }
+    else {
+        billInputField.classList.remove('input__style--error');
+        billError.textContent = '';
+    }
+
+    if (peopleValue == '') {
+        peopleInputField.classList.add('input__style--error');
+        peopleError.textContent = 'Cannot be 0!';
+    } else if (peopleValue < 1) {
+        peopleInputField.classList.add('input__style--error');
+        peopleError.textContent = 'Must be at least 1!';
+    } else {
+        peopleInputField.classList.remove('input__style--error');
+        peopleError.textContent = '';
+    }
 }
 
-function tipAmount(){
-    validInput();
-    let tipPerc = Bill.value * Five;
-    let result = tipPerc / PeopleNr.value;
-    var rounded = Math.round((result + Number.EPSILON) * 100) / 100;
-    document.querySelector('.tip--output--amount').innerHTML = "$" + rounded;
-    document.querySelector('.tip--output--total').innerHTML = "$" + tipPerc;
-    console.log(result);  
-}
-function resetBttn(){
-    Bill.value= null;
-    PeopleNr.value = null;
-    document.querySelector('.tip--output--amount').innerHTML = "$0.00";
-    document.querySelector('.tip--output--total').innerHTML = "$0.00";
-}
+tipPercentButtons.forEach(button => {
+    button.addEventListener('dblclick', function () {
+        const buttonID = this.id;
+        let tipPercentage;
 
-if (Bill.after.value == ""||PeopleNr.after.value == ""){
-    validInput();
+
+        switch (buttonID) {
+            case '5__percent':
+                tipPercentage = 5;
+                break;
+            case '10__percent':
+                tipPercentage = 10;
+                break;
+            case '15__percent':
+                tipPercentage = 15;
+                break;
+            case '25__percent':
+                tipPercentage = 25;
+                break;
+            case '50__percent':
+                tipPercentage = 50;
+                break;
+            case 'custom__percent':
+                let customTipPercentValue = parseInt(customTipPercentButton.value);
+                tipPercentage = customTipPercentValue;
+                break;
+        }
+
+        console.log(tipPercentage);
+        calculateTip(tipPercentage);
+    });
+});
+
+function calculateTip(tipPercentage) {
+    let billValue = parseFloat(billInputField.value);
+    let peopleValue = parseInt(peopleInputField.value);
+    let tip = billValue * (tipPercentage / 100);
+
+    let tipPerPerson = (tip / peopleValue).toFixed(2);
+    let total = ((billValue + tip) / peopleValue).toFixed(2);
+
+    tipAmountDisplay.textContent = "$" + tipPerPerson;
+    tipTotalDisplay.textContent = "$" + total;
 }

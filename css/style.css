@@ -1,213 +1,313 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap');
-:root{
-    --darkclr: #00474b;
-    --lightclr: #fff;
-    --mainclr: #1fc5ad;
-    --secondclr: #c5e4e7;
-    --inputclr: #f3f8fb;
+* {
+    font-family: Roboto Mono;
+    box-sizing: border-box;
+}
+
+:root {
     font-size: 15px;
-    margin: 0;
-    padding: 0;
-    font-family: Roboto Mono, sans-serif;
+    --backgroundclr: #c5e4e7;
+    --darkclr: #00474b;
+    --accentclr: #1dc3ab;
+    --lightclr: #f3f8fb;
+    --errorclr: #ff5724;
 }
-body{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: var(--secondclr);
-    padding: 0;
-    margin: 0;
-    height: 100vh;
+
+@media screen and (max-width:500px) {
+
+    :root {
+        font-size: 13px;
+    }
+
+    body {
+        flex-direction: column;
+        justify-content: flex-end;
+    }
+
+    main {
+        width: 100%;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 2rem;
+        border-radius: 2rem 2rem 0 0;
+    }
+
+    #tip__calculator {
+        height: 100%;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        gap: 4rem;
+    }
+
+    #input__section {
+        width: 100%;
+        height: 50%;
+        justify-content: space-evenly;
+    }
+
+    #output__section {
+        width: 100%;
+        height: 50%;
+        border-radius: 1rem;
+        padding: 2rem;
+    }
+
+    .input__style {
+        padding: 1rem;
+    }
+
+    .main__button {
+        padding: 0.8rem;
+    }
+
+    .custom__button {
+        padding: 0.8rem;
+    }
+
+    .grid--box {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
 }
-.label{
-    display: block;
-    padding: 0;
-    padding-bottom: 1rem;
-    margin: 0;
-    font-size: 1rem;
-    transition: ease all 0.2s;
-}
-.calculator{
-    height: 450px;
-    display: flex;
-    justify-content: center;
-    align-items: stretch;
-    background-color: var(--lightclr);
-    color: var(--darkclr);
-    gap: 5rem;
-    padding: 3rem;
-    border-radius: 2.5rem;
-    box-shadow: 0 0.5rem 50px #1fc5ad;
-}
-.calculator--input{
-    min-width: 300px;
-    max-width: max-content;
-    height: auto;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 3rem;
-}
-.tip--input{
-    width:auto;
-    height: 1rem;
-    border-radius: 0.25rem;
-    background-color: var(--inputclr);
-    padding: 1rem;
-    cursor: pointer;
-    border: none;
-    font-size: 1.3rem;
-    font-family: Roboto Mono, sans-serif;
-    font-weight: 700;
-    color: var(--darkclr);
-    text-align: right;
-    transition: all ease 0.2s;
-}
-.tip--input:hover{
-    box-shadow: 0 0 0 1.5px #1fc5ad;
+
+@media screen and (min-width: 501px) {
+    body {
+        justify-content: center;
+        align-items: center;
+    }
+
+    main {
+        width: 70%;
+        height: auto;
+        border-radius: 2rem;
+        padding: 3rem;
+    }
+
+    #tip__calculator {
+        gap: 3rem;
+        justify-content: space-between;
+    }
+
+    #input__section {
+        height: 100%;
+        width: 50%;
+        gap: 1rem;
+    }
+
+    #output__section {
+
+        height: 100%;
+        padding: 3rem;
+        border-radius: 1rem;
+        width: 50%;
+    }
+
+    .input__style {
+        padding: 1rem;
+    }
+
+    .main__button {
+        padding: 1rem 2rem;
+    }
+
+    .custom__button {
+        padding: 1rem 2rem;
+    }
+
+    .grid--box {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+    }
+
 
 }
-.tip--input:focus{
-    outline: none;
-    box-shadow: 0 0 0 1.5px #1fc5ad;
-}
-.tip--percentage--button{
-    height: auto;
-    background-color: var(--darkclr);
-    color: var(--lightclr);
-    border-radius: 0.3rem;
-    cursor: pointer;
-    border: none;
-    font-size: 1.3rem;
-    font-weight: 700;
-    text-align: center;
-    padding: 0.8rem;
-    transition: all ease 0.2s;
-    font-family: Roboto Mono, sans-serif;
 
-}
-.tip--percentage--button:hover{
-    background-color: var(--secondclr);
-    color: var(--darkclr);
-}
-.tip--percentage--button::placeholder{
-    text-align: center;
-}
-.tip--percentage{
+body {
+    width: 100dvw;
+    height: 100dvh;
     display: flex;
-    flex-direction: column;
+    padding: 0;
+    margin: 0;
+    background-color: var(--backgroundclr);
+}
+
+label {
+    display: flex;
+    position: absolute;
+    padding: 0;
+    margin: 0;
+    left: 1rem;
+    color: var(--accentclr);
+}
+
+main {
+    display: flex;
+    background-color: white;
+}
+
+#tip__calculator {
+    display: flex;
     width: 100%;
-}
-.tip--percentage--grid{
-    display: grid;
-    width: auto;
     height: auto;
-    gap: 1rem;
-    grid-template-columns: repeat(3, 100px);
-    grid-template-rows: repeat(2, 1fr);
 }
-.custom, .custom::-webkit-inner-spin-button{
-    background-color: var(--inputclr);
-    color: var(--darkclr);
-    -webkit-appearance: none;
-    text-align: right;
-}
-.bill--amount::-webkit-inner-spin-button{
-    -webkit-appearance: none;
-}
-.people--number::-webkit-inner-spin-button{
-    -webkit-appearance: none;
-}
-.calculator--output{
-    width: 300px;
-    height: auto;
+
+#input__section {
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+}
+
+#output__section {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     background-color: var(--darkclr);
-    color: var(--lightclr);
-    padding: 2rem;
-    border-radius: 1.5rem;
-    justify-content: space-between;
-    gap: 10rem;
 }
-.tip--output{
-    display: flex;
+
+#tip__display {
     justify-content: space-between;
-    flex-direction: column;
     gap: 2rem;
 }
-.tip--info{
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-}
-.tip--info--desc{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 0.5rem;
-}
-.label--output{
-    display: inline;
-    padding: 0;
-}
-.sublabel{
-    display: inline;
-    padding: 0;
-    margin: 0;
-    font-size: 0.8rem;
-    color: var(--secondclr);
-}
-.tip--output--total, .tip--output--amount{
-    display: inline;
-    padding: 0;
-    margin: 0;
-    font-size: 3rem;
-    color: var(--mainclr);
-}
 
-.reset--bttn{
-    font-family: Roboto Mono, sans-serif;
+#reset__button {
+    justify-content: center;
+    align-items: center;
     color: var(--darkclr);
-    background-color: var(--mainclr);
+    background-color: var(--accentclr);
     border: none;
-    font-weight: 700;
-    border-radius: 0.3rem;
-    padding: 1rem;
-    font-size: 1.3rem;
-    transition: all ease 0.2s;
+    outline: none;
+    transition: all ease 0.3s;
     cursor: pointer;
 }
-.reset--bttn:hover{
+
+#reset__button:hover {
+    outline: none;
     background-color: var(--lightclr);
 }
-.active{
-    color: var(--darkclr);
-    background-color: var(--mainclr);
-}
-.error{
-    box-shadow: 0 0 0 1.5px red;
-}
-.label--row{
+
+.input__box {
     display: flex;
+    width: 100%;
+    height: 100%;
+    gap: 1rem;
+}
+
+.input__row {
+    display: flex;
+    width: 100%;
+    align-items: center;
     justify-content: space-between;
-    align-items: stretch;
+    position: relative;
+}
+
+.input__style {
+    display: flex;
     width: 100%;
-    transition: ease all 0.2s;
+    font-weight: 900;
+    font-size: 1.2rem;
+    margin: 0;
+    text-align: right;
+    border-radius: 0.3rem;
+    border: none;
+    background-color: var(--lightclr);
+    transition: outline ease 0.3s;
 }
-.label--error{
-    color: red;
+
+.input__style:hover {
+    outline: solid 3px var(--darkclr);
 }
-.bill{
+
+.input__style--error {
+    outline: solid 3px var(--errorclr);
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.main__button {
+    background-color: var(--darkclr);
+    color: white;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: all ease 0.2s;
+    cursor: pointer;
+    outline: none;
+}
+
+.main__button:hover {
+    color: var(--darkclr);
+    background-color: var(--backgroundclr);
+    outline: none;
+}
+
+.selected__button {
+    color: var(--darkclr);
+    background-color: var(--accentclr);
+}
+
+.custom__button {
+    display: flex;
+    width: 100%;
+    text-align: center;
+}
+
+.label {
+    display: inline;
+    margin: 0;
+    padding: 0;
+    font-size: 1rem;
+    color: var(--accentclr);
+}
+
+.error__message {
+    color: var(--errorclr);
+    transition: all ease 0.2s;
+}
+
+.output__label {
+    color: white;
+    font-size: 1rem;
+}
+
+.output__label--info {
+    color: #82b2b6;
+}
+
+.tip__row {
+    justify-content: space-between;
+    align-items: center;
+}
+
+.tip__output {
+    display: flex;
+    color: var(--accentclr);
+    font-size: 3rem;
+    padding: 0;
+    margin: 0;
+}
+
+.status__row {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+
+.column--box {
     display: flex;
     flex-direction: column;
-    align-items: stretch;
-    width: 100%;
 }
-.people{
+
+.row--box {
     display: flex;
-    flex-direction: column;
-    align-items: stretch;
+}
+
+.grid--box {
+    display: grid;
     width: 100%;
 }

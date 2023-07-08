@@ -1,56 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tip Calculator</title>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.css"
+        integrity="sha512-Z0kTB03S7BU+JFU0nw9mjSBcRnZm2Bvm0tzOX9/OuOuz01XQfOpa0w/N9u6Jf2f1OAdegdIPWZ9nIZZ+keEvBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="js/script.js" defer></script>
-    
+    <title>Document</title>
 </head>
-<body onload="tipAmount()">
-    <div class="calculator">
-        <div class="calculator--input" name="tipcalc">
-            <div class="bill">
-                <span class="label--row"><h2 class="label label--input">Bill</h2><h2 class="label label--error bill--error"></h2></span>
-                <input class="tip--input bill--amount" type="number" placeholder="0.00">
-            </div> 
-            <div class="tip--percentage">
-                <h2 class="label label--input">Select Tip %</h2>
-                <div class="tip--percentage--grid">
-                    <button class="tip--percentage--button" type="button">5%</button>
-                    <button class="tip--percentage--button" type="button">10%</button>
-                    <button class="tip--percentage--button" type="button">15%</button>
-                    <button class="tip--percentage--button" type="button">25%</button>
-                    <button class="tip--percentage--button" type="button">50%</button>
-                    <input class="tip--percentage--button custom" type="number" placeholder="Custom">
-                </div>
-            </div>
-            <div class="people">
-                <span class="label--row"><h2 class="label label--input">Number of People</h2><h2 class="label label--error people--error"></h2></span>
-                <input class="tip--input people--number" type="number" placeholder="1">
-            </div>
-        </div>
-        <div class="calculator--output">
-            <div class="tip--output">
-                <div class="tip--info">
-                    <div class="tip--info--desc">
-                        <h2 class="label label--output">Tip Amount</h2>
-                        <h3 class="sublabel">/ person</h3>
+
+<body>
+    <main>
+        <div id="tip__calculator">
+
+            <section id="input__section">
+                <div id="bill" class="column--box">
+                    <div class="input__box column--box">
+                        <span class="status__row row--box">
+                            <h3 class="input__label label">Bill</h3>
+                            <h3 id="bill__error" class="error__message label"></h3>
+                        </span>
+                        <span class="input__row row--box">
+                            <label for="bill__input"><i class="fa-solid fa-dollar-sign"></i></label>
+                            <input name="billField" id="bill__input" class="input__field input__style" type="number"
+                                step=".01" placeholder="1.00">
+                        </span>
                     </div>
-                    <h1 class="tip--output--amount">$0.00</h1>
                 </div>
-                <div class="tip--info">
-                    <div class="tip--info--desc">
-                        <h2 class="label label--output">Total</h2>
-                        <h3 class="sublabel">/ person</h3>
+                <div id="tip--percent" class="column--box">
+                    <div class="input__box column--box">
+                        <span class="status__row row--box">
+                            <h3 class="input__label label">Select Tip %</h3>
+                            <h3 class="error__message label"></h3>
+                        </span>
+                        <div id="tip--percent__grid" class="grid--box">
+                            <button id="5__percent" class="main__button percent__button input__style">5%</button>
+                            <button id="10__percent" class="main__button percent__button input__style">10%</button>
+                            <button id="15__percent" class="main__button percent__button input__style">15%</button>
+                            <button id="25__percent" class="main__button percent__button input__style">25%</button>
+                            <button id="50__percent" class="main__button percent__button input__style">50%</button>
+                            <input id="custom__percent" placeholder="Custom"
+                                class="custom__button percent__button input__style" onmouseleave="" type="number">
+                        </div>
                     </div>
-                    <h1 class="tip--output--total">$0.00</h1>
                 </div>
-            </div>
-            <button class="reset--bttn" onclick="resetBttn()">RESET</button>
+                <div id="people" class="column--box">
+                    <div class="input__box column--box">
+                        <span class="status__row row--box">
+                            <h3 class="input__label label">Number of People</h3>
+                            <h3 id="people__error" class="error__message label"></h3>
+                        </span>
+                        <span class="input__row">
+                            <label for="people__input"><i class="fa-solid fa-user"></i></label>
+                            <input id="people__input" class="input__field input__style" type="number" placeholder="1">
+                        </span>
+                    </div>
+                </div>
+            </section>
+            <section id="output__section">
+                <div id="tip__display" class="column--box">
+                    <span class="tip__row row--box">
+                        <span class="column--box">
+                            <h3 class="output__label label">Tip Amount</h3>
+                            <h4 class="output__label--info label">/ person</h4>
+                        </span>
+                        <h1 id="tip__amount" class="tip__output">$0.00</h1>
+                    </span>
+                    <span class="tip__row row--box">
+                        <span class="column--box">
+                            <h3 class="output__label label">Total</h3>
+                            <h4 class="output__label--info label">/ person</h4>
+                        </span>
+                        <h1 id="tip__total" class="tip__output">$0.00</h1>
+                    </span>
+                </div>
+                <button id="reset__button" class="input__style">RESET</button>
+            </section>
         </div>
-    </div>
+    </main>
 </body>
+
 </html>
